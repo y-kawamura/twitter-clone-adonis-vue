@@ -41,5 +41,7 @@ Route.group(() => {
 Route.post('/tweet', 'TweetController.tweet')
   .middleware(['auth:jwt'])
 Route.get('/tweets/:id', 'TweetController.show')
+Route.post('/tweets/reply:id', 'TweetController.reply')
+  .middleware(['auth:jwt'])
 
 Route.get(':username', 'UserController.showProfile')
