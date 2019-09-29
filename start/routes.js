@@ -30,4 +30,11 @@ Route.group(() => {
 }).prefix('account')
   .middleware(['auto:jwt'])
 
+Route.group(() => {
+  Route.get('/user_to_follow', 'UserController.usersToFollow')
+  Route.post('/follow/:id', 'UserController.follow')
+  Route.delete('/unfollow/:id', 'UserController.unFollow')
+}).prefix('users')
+  .middleware(['auth:jwt'])
+
 Route.get(':username', 'UserController.showProfile')
