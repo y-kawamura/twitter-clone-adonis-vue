@@ -38,10 +38,10 @@ class UserController {
         data: token
       });
     } catch (error) {
-      response.status(400).json({
+      return response.status(400).json({
         status: 'error',
         message: 'Invalid email/password'
-      })
+      });
     }
   };
 }
