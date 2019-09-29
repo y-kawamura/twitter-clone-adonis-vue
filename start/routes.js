@@ -22,3 +22,8 @@ Route.get('/', () => {
 
 Route.post('/signup', 'UserController.signup')
 Route.post('/login', 'UserController.login')
+
+Route.group(() => {
+  Route.get('/me', 'UserController.me')
+}).prefix('account')
+  .middleware(['auto:jwt'])
