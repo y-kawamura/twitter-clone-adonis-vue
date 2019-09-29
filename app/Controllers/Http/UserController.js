@@ -1,6 +1,7 @@
 'use strict'
 
 const User = use("App/Model/User");
+const Hash = use('Hash')
 
 class UserController {
   async signup ({ request, auth, response }) {
@@ -95,6 +96,34 @@ class UserController {
         message: 'There was a problem updating profile, please try again later.'
       })
     }
+  };
+
+  async changePassword ({ reqeust, auth, response }) {
+    // get currently authenticated user
+    const user = auth.current.user;
+
+    // verify if current password matches
+    const verifyPassword = await Hash.verify(
+      reqeust.input('password'),
+      user.password
+    );
+
+    // display appropriate message
+    if (!verifyPassword) {
+      return response.status(400).json({
+        status: 'error',
+        message: 'Current password cound not be verified! Please try again.'
+      });
+    }
+
+    // hash and save new password
+    user.password = await Hash.make(request.input('newPassword'));
+    await user.save();
+
+    return response.json({
+      status: 'success',
+      message: 'Password updated!'
+    });
   };
 }
 
