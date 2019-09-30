@@ -43,6 +43,8 @@ Route.post('/tweet', 'TweetController.tweet')
 Route.get('/tweets/:id', 'TweetController.show')
 Route.post('/tweets/reply:id', 'TweetController.reply')
   .middleware(['auth:jwt'])
+Route.delete('/tweets/destroy/:id', 'TweetController.destroy')
+  .middleware(['auth:jwt'])
 
 Route.group(() => {
   Route.post('/create', 'FavoriteController.favorite')

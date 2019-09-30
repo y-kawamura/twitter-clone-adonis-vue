@@ -22,7 +22,7 @@ class TweetController {
       message: 'Tweet posted!',
       data: tweet
     });
-  };
+  }
 
   async show ({ params, response }) {
     try {
@@ -44,7 +44,7 @@ class TweetController {
         message: 'Tweet not found'
       });
     }
-  };
+  }
 
   async reply ({ request, auth, params, response }) {
     // get currently authenticated user
@@ -68,7 +68,26 @@ class TweetController {
       message: 'Reply posted!',
       data: reply
     });
-  };
+  }
+
+  async destroy ({ request, auth, params, response }) {
+    // get currently authenticated user
+    const user = auth.current.user;
+
+    // get tweet with the specified ID
+    const tweet = await Tweet.query()
+      .where('user_id', user.id)
+      .where('id', params.id)
+      .firstOrFail();
+
+    await tweet.delete();
+
+    return response.json({
+      status: 'success',
+      message: 'Tweet deleted!',
+      data: null
+    });
+  }
 }
 
 module.exports = TweetController
