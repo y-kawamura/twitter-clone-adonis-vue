@@ -13,7 +13,7 @@ class UserController {
       // save user to database
       const user = await User.create(userData);
       // generate JWT token for user
-      const taken = await auth.generate(user);
+      const token = await auth.generate(user);
   
       return response.json({
         status: 'success',

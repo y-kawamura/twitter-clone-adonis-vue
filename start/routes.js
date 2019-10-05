@@ -28,7 +28,7 @@ Route.group(() => {
   Route.put('/update_profile', 'UserController.updateProfile')
   Route.put('/change_password', 'UserController.changePassword')
 }).prefix('account')
-  .middleware(['auto:jwt'])
+  .middleware(['auth:jwt'])
 
 Route.group(() => {
   Route.get('/user_to_follow', 'UserController.usersToFollow')
