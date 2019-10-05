@@ -8,10 +8,19 @@ class UserController {
   async signup ({ request, auth, response }) {
     // get user data from signup form
     const userData = request.only(['name', 'username', 'email', 'password']);
-  
+
     try {
       // save user to database
-      const user = await User.create(userData);
+      const user = new User;
+      user.name = userData.name;
+      user.username = userData.username;
+      user.email = userData.email;
+      user.password = userData.password;
+      user.location = "";
+      user.website_url = "";
+      user.bio = "";
+      await user.save();
+
       // generate JWT token for user
       const token = await auth.generate(user);
   
