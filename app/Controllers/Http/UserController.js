@@ -127,7 +127,7 @@ class UserController {
     }
 
     // hash and save new password
-    user.password = await Hash.make(request.input('newPassword'));
+    user.password = request.input('newPassword');
     await user.save();
 
     return response.json({
