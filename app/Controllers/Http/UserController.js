@@ -108,13 +108,13 @@ class UserController {
     }
   };
 
-  async changePassword ({ reqeust, auth, response }) {
+  async changePassword ({ request, auth, response }) {
     // get currently authenticated user
     const user = auth.current.user;
 
     // verify if current password matches
     const verifyPassword = await Hash.verify(
-      reqeust.input('password'),
+      request.input('password'),
       user.password
     );
 
