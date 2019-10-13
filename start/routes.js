@@ -32,7 +32,7 @@ Route.group(() => {
 
 Route.group(() => {
   Route.get('/user_to_follow', 'UserController.usersToFollow')
-  Route.post('/follow/:id', 'UserController.follow')
+  Route.post('/follow', 'UserController.follow')
   Route.delete('/unfollow/:id', 'UserController.unFollow')
   Route.get('/timeline', 'UserController.timeline')
 }).prefix('users')
@@ -41,7 +41,7 @@ Route.group(() => {
 Route.post('/tweet', 'TweetController.tweet')
   .middleware(['auth:jwt'])
 Route.get('/tweets/:id', 'TweetController.show')
-Route.post('/tweets/reply:id', 'TweetController.reply')
+Route.post('/tweets/reply/:id', 'TweetController.reply')
   .middleware(['auth:jwt'])
 Route.delete('/tweets/destroy/:id', 'TweetController.destroy')
   .middleware(['auth:jwt'])
